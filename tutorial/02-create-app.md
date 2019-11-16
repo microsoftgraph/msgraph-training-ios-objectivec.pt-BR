@@ -16,7 +16,6 @@ Comece criando um novo projeto Swift.
 Antes de prosseguir, instale algumas dependências adicionais que serão usadas posteriormente.
 
 - [Biblioteca de autenticação da Microsoft (MSAL) para IOS](https://github.com/AzureAD/microsoft-authentication-library-for-objc) para autenticação com o Azure AD.
-- [MSAL provedor de autenticação para o objetivo C](https://github.com/microsoftgraph/msgraph-sdk-objc-auth) para conectar o MSAL ao SDK do Microsoft Graph.
 - [SDK do Microsoft Graph para o objetivo C](https://github.com/microsoftgraph/msgraph-sdk-objc) para fazer chamadas para o Microsoft Graph.
 - [SDK de modelos do Microsoft Graph para o objetivo C](https://github.com/microsoftgraph/msgraph-sdk-objc-models) para objetos fortemente tipados que representam os recursos do Microsoft Graph, como usuários ou eventos.
 
@@ -31,10 +30,9 @@ Antes de prosseguir, instale algumas dependências adicionais que serão usadas 
 1. Abra o Podfile e adicione as seguintes linhas logo após a `use_frameworks!` linha.
 
     ```Ruby
-    pod 'MSAL', '~> 0.3.0'
-    pod 'MSGraphMSALAuthProvider', '~> 0.1.1'
-    pod 'MSGraphClientSDK', ' ~> 0.1.3'
-    pod 'MSGraphClientModels', '~> 0.1.1'
+    pod 'MSAL', '~> 1.0.2'
+    pod 'MSGraphClientSDK', ' ~> 1.0.0'
+    pod 'MSGraphClientModels', '~> 1.3.0'
     ```
 
 1. Salve o Podfile e execute o seguinte comando para instalar as dependências.
@@ -114,13 +112,13 @@ Nesta seção, você criará os modos de exibição do aplicativo: uma página d
 
     ![Uma captura de tela de arrastar um segue manual para o novo controlador de barra de guias no Xcode](./images/add-segue.png)
 
-1. Selecione o segue que você acabou de adicionar e, em seguida, selecione o **Inspetor de atributos**. Defina o campo **identificador** como `userSignedIn`.
+1. Selecione o segue que você acabou de adicionar e, em seguida, selecione o **Inspetor de atributos**. Definir o campo **identificador** como `userSignedIn`e definir a **apresentação** como **tela inteira**.
 
     ![Uma captura de tela do campo identificador no Inspetor de atributos no Xcode](./images/set-segue-identifier.png)
 
 1. Selecione o **Item 1 cena**e, em seguida, selecione o **Inspetor de conexões**.
 1. Em **segues disparado**, arraste o círculo não preenchido ao lado de **manual** no **controlador de exibição de entrada** no storyboard. Selecione **Mostrar modalmente** no menu pop-up.
-1. Selecione o segue que você acabou de adicionar e, em seguida, selecione o **Inspetor de atributos**. Defina o campo **identificador** como `userSignedOut`.
+1. Selecione o segue que você acabou de adicionar e, em seguida, selecione o **Inspetor de atributos**. Definir o campo **identificador** como `userSignedOut`e definir a **apresentação** como **tela inteira**.
 
 ### <a name="create-welcome-page"></a>Criar página de boas-vindas
 

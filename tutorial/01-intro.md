@@ -13,7 +13,7 @@ Antes de iniciar este tutorial, você deve ter o seguinte instalado em sua máqu
 - [CocoaPods](https://cocoapods.org)
 
 > [!NOTE]
-> Este tutorial foi escrito usando o Xcode versão 10,3 e o CocoaPods versão 1.7.5. As etapas deste guia podem funcionar com outras versões, mas que não foram testadas.
+> Este tutorial foi escrito usando o Xcode versão 11.2.1 e o CocoaPods versão 1.8.4. As etapas deste guia podem funcionar com outras versões, mas que não foram testadas.
 
 ## <a name="feedback"></a>Comentários
 
