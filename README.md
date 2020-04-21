@@ -8,11 +8,11 @@ Neste laboratório, você criará um aplicativo iOS escrito em Objective-C usand
 
 - [Objetivo do iOS-C do Microsoft Graph](https://docs.microsoft.com/graph/tutorials/ios-objectivec)
 
-## <a name="demos"></a>Demonstrações
+## <a name="completed-sample"></a>Exemplo completo
 
-- [01-create-app](demos/01-create-app): concluído [criar um aplicativo do IOS Objective-C](https://docs.microsoft.com/graph/tutorials/ios-objectivec?tutorial-step=1)
-- [02-Add-AAD-auth](demos/02-add-aad-auth): concluído [Adicionar autenticação do Azure ad](https://docs.microsoft.com/graph/tutorials/ios-objectivec?tutorial-step=3)
-- [03-Add-msgraph](demos/03-add-msgraph): concluído [obter dados de calendário](https://docs.microsoft.com/graph/tutorials/ios-objectivec?tutorial-step=4)
+Se você só quiser que o exemplo completo seja gerado seguindo este laboratório, você pode encontrá-lo aqui.
+
+- [Projeto concluído](demo)
 
 ## <a name="watch-the-module"></a>Assista ao módulo
 
@@ -27,8 +27,9 @@ Este módulo foi gravado e está disponível no canal do Office Development YouT
 
 ## <a name="version-history"></a>Histórico de versão
 
-| Versão |        Data        |                                                               Comments                                                               |
+| Versão |        Data        |                                                               Comentários                                                               |
 | ------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 1.9     | 7 de abril de 2020      | Tutorial atualizado com o mais recente Xcode, MSAL, etc.                                                                                     |
 | 1,8     | 23 de agosto de 2019    | Treinamento revisado para integração com o docs.microsoft.com                                                                                |
 | 1.7     | 18 de junho de 2019      | Leiame atualizado para a gravação de screencast atualizada                                                                                     |
 | 1.6     | 12 de maio de 2019       | atualização de conteúdo do 2019Q4                                                                                                               |

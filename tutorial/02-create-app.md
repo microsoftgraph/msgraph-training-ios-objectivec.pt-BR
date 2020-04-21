@@ -30,7 +30,7 @@ Antes de prosseguir, instale algumas dependências adicionais que serão usadas 
 1. Abra o Podfile e adicione as seguintes linhas logo após a `use_frameworks!` linha.
 
     ```Ruby
-    pod 'MSAL', '~> 1.0.2'
+    pod 'MSAL', '~> 1.1.1'
     pod 'MSGraphClientSDK', ' ~> 1.0.0'
     pod 'MSGraphClientModels', '~> 1.3.0'
     ```
@@ -97,12 +97,14 @@ Nesta seção, você criará os modos de exibição do aplicativo: uma página d
 
     ![Uma captura de tela do campo título no Inspetor de atributos no Xcode](./images/set-button-title.png)
 
+1. Com o botão selecionado, selecione o botão **alinhar** na parte inferior do storyboard. Selecione as duas opções **horizontalmente em contêiner** e **verticalmente em restrições de contêiner** , deixe seus valores como 0 e selecione **adicionar duas restrições**.
+
+    ![Uma captura de tela das configurações de restrições de alinhamento no Xcode](./images/add-alignment-constraints.png)
+
 1. Selecione o **controlador de exibição de entrada**e, em seguida, selecione o **Inspetor de conexões**.
 1. Em **ações recebidas**, arraste o círculo não preenchido ao lado de **entrar** no botão. Selecione **retoque** no menu pop-up.
 
     ![Uma captura de tela de arrastar a ação de entrada para o botão no Xcode](./images/connect-sign-in-button.png)
-
-1. No menu **Editor** , selecione **resolver problemas de layout automático**e, em seguida, selecione **Adicionar restrições ausentes** abaixo **de todas as exibições na controladora de exibição de entrada**.
 
 ### <a name="create-tab-bar"></a>Criar barra de guias
 
@@ -129,7 +131,7 @@ Nesta seção, você criará os modos de exibição do aplicativo: uma página d
 
     ![Uma captura de tela do modo de exibição ativo do conjunto de imagens no Xcode](./images/add-default-user-photo.png)
 
-1. Crie um novo arquivo de **classe Touch** do Cocoa **** na pasta GraphTutorial `WelcomeViewController`chamada. Escolha **UIViewController** na **subclasse de** Field.
+1. Crie um novo arquivo de **classe Touch** do Cocoa **GraphTutorial** na pasta GraphTutorial `WelcomeViewController`chamada. Escolha **UIViewController** na **subclasse de** Field.
 1. Abra **WelcomeViewController. h** e adicione o código a seguir dentro `@interface` da declaração.
 
     ```objc
@@ -175,18 +177,45 @@ Nesta seção, você criará os modos de exibição do aplicativo: uma página d
     - Dois **Rótulos**
     - Um **botão**
 
-1. Selecione o modo de exibição imagem e, em seguida, selecione o **Inspetor de tamanho**.
-1. Defina a **largura** e a **altura** como 196.
-1. Selecione o segundo rótulo e, em seguida, selecione o **Inspetor de atributos**.
-1. Altere a **cor** para **cor cinza escuro**e altere a **fonte** para **System 12,0**.
-1. Selecione o botão e, em seguida, selecione o **Inspetor de atributos**.
-1. Altere o **título** para `Sign Out`.
 1. Usando o **Inspetor de conexões**, faça as seguintes conexões.
 
     - Vincule a saída **UserDisplayName** ao primeiro rótulo.
     - Vincule a saída **UserEmail** ao segundo rótulo.
     - Vincule a tomada **userProfilePhoto** à visualização de imagem.
     - Vincule a ação de **SignOut** recebida à **retoque**do botão dentro.
+
+1. Selecione o modo de exibição imagem e, em seguida, selecione o **Inspetor de tamanho**.
+1. Defina a **largura** e a **altura** como 196.
+1. Use o botão **alinhar** para adicionar a restrição de **contêiner horizontalmente** com um valor de 0.
+1. Use o botão **adicionar novas restrições** (ao lado do botão **alinhar** ) para adicionar as seguintes restrições:
+
+    - Alinhar parte superior a: área segura, valor: 0
+    - Espaço inferior para: nome de exibição do usuário, valor: Standard
+    - Altura, valor: 196
+    - Largura, valor: 196
+
+    ![Uma captura de tela das novas configurações de restrições no Xcode](./images/add-new-constraints.png)
+
+1. Selecione o primeiro rótulo e, em seguida, use o botão **alinhar** para adicionar a restrição de **contêiner horizontalmente** com um valor de 0.
+1. Use o botão **adicionar novas restrições** para adicionar as seguintes restrições:
+
+    - Espaço principal para: foto de perfil de usuário, valor: Standard
+    - Espaço inferior para: email do usuário, valor: padrão
+
+1. Selecione o segundo rótulo e, em seguida, selecione o **Inspetor de atributos**.
+1. Altere a **cor** para **cor cinza escuro**e altere a **fonte** para **System 12,0**.
+1. Use o botão **alinhar** para adicionar a restrição de **contêiner horizontalmente** com um valor de 0.
+1. Use o botão **adicionar novas restrições** para adicionar as seguintes restrições:
+
+    - Espaço principal para: nome de exibição do usuário, valor: Standard
+    - Espaço inferior para: sair, valor: 14
+
+1. Selecione o botão e, em seguida, selecione o **Inspetor de atributos**.
+1. Altere o **título** para `Sign Out`.
+1. Use o botão **alinhar** para adicionar a restrição de **contêiner horizontalmente** com um valor de 0.
+1. Use o botão **adicionar novas restrições** para adicionar as seguintes restrições:
+
+    - Espaço principal para: email do usuário, valor: 14
 
 1. Selecione o item da barra de guias na parte inferior da cena e, em seguida, selecione o **Inspetor de atributos**. Altere o **título** para `Me`.
 1. No menu **Editor** , selecione **resolver problemas de layout automático**e, em seguida, selecione **Adicionar restrições ausentes** abaixo **de todos os modos de exibição no controlador de exibição de boas-vindas**
@@ -197,7 +226,7 @@ A cena de boas-vindas deve ser semelhante a esta quando você terminar.
 
 ### <a name="create-calendar-page"></a>Criar página de calendário
 
-1. Crie um novo arquivo de **classe Touch** do Cocoa **** na pasta GraphTutorial `CalendarViewController`chamada. Escolha **UIViewController** na **subclasse de** Field.
+1. Crie um novo arquivo de **classe Touch** do Cocoa **GraphTutorial** na pasta GraphTutorial `CalendarViewController`chamada. Escolha **UIViewController** na **subclasse de** Field.
 1. Abra **CalendarViewController. h** e adicione o código a seguir dentro `@interface` da declaração.
 
     ```objc
@@ -231,7 +260,7 @@ A cena de boas-vindas deve ser semelhante a esta quando você terminar.
 1. Usando a **biblioteca**, adicione um **modo de exibição de texto** à **cena do item 2**.
 1. Selecione o modo de exibição de texto que você acabou de adicionar. No **Editor**, escolha **incorporar no**e modo de **rolagem**.
 1. Usando o **Inspetor de conexões**, conecte a tomada **calendarJSON** à visualização de texto.
-1. 1. Selecione o item da barra de guias na parte inferior da cena e, em seguida, selecione o **Inspetor de atributos**. Altere o **título** para `Calendar`.
+1. Selecione o item da barra de guias na parte inferior da cena e, em seguida, selecione o **Inspetor de atributos**. Altere o **título** para `Calendar`.
 1. No menu **Editor** , selecione **resolver problemas de layout automático**e, em seguida, selecione **Adicionar restrições ausentes** abaixo **de todos os modos de exibição no controlador de exibição de boas-vindas**
 
 A cena do calendário deve ser semelhante a esta quando você terminar.
@@ -240,7 +269,7 @@ A cena do calendário deve ser semelhante a esta quando você terminar.
 
 ### <a name="create-activity-indicator"></a>Criar indicador de atividade
 
-1. Crie um novo arquivo de **classe Touch** do Cocoa **** na pasta GraphTutorial `SpinnerViewController`chamada. Escolha **UIViewController** na **subclasse de** Field.
+1. Crie um novo arquivo de **classe Touch** do Cocoa **GraphTutorial** na pasta GraphTutorial `SpinnerViewController`chamada. Escolha **UIViewController** na **subclasse de** Field.
 1. Abra **SpinnerViewController. h** e adicione o código a seguir dentro `@interface` da declaração.
 
     ```objc
@@ -250,49 +279,10 @@ A cena do calendário deve ser semelhante a esta quando você terminar.
 
 1. Abra **SpinnerViewController. m** e substitua seu conteúdo pelo código a seguir.
 
-    ```objc
-    #import "SpinnerViewController.h"
-
-    @interface SpinnerViewController ()
-    @property (nonatomic) UIActivityIndicatorView* spinner;
-    @end
-
-    @implementation SpinnerViewController
-
-    - (void)viewDidLoad {
-        [super viewDidLoad];
-
-        _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
-                    UIActivityIndicatorViewStyleWhiteLarge];
-
-        self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
-        [self.view addSubview:_spinner];
-
-        _spinner.translatesAutoresizingMaskIntoConstraints = false;
-        [_spinner startAnimating];
-
-        [_spinner.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = true;
-        [_spinner.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = true;
-    }
-
-    - (void) startWithContainer:(UIViewController *)container {
-        [container addChildViewController:self];
-        self.view.frame = container.view.frame;
-        [container.view addSubview:self.view];
-        [self didMoveToParentViewController:container];
-    }
-
-    - (void) stop {
-        [self willMoveToParentViewController:nil];
-        [self.view removeFromSuperview];
-        [self removeFromParentViewController];
-    }
-
-    @end
-    ```
+    :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/SpinnerViewController.m" id="SpinnerViewSnippet":::
 
 ## <a name="test-the-app"></a>O aplicativo de teste
 
-Salve suas alterações e inicie o aplicativo. Você deve ser capaz de se mover entre as telas usando **** os botões entrar **e sair e** a barra de guias.
+Salve suas alterações e inicie o aplicativo. Você deve ser capaz de se mover entre as telas usando **Sign In** os botões entrar **e sair e** a barra de guias.
 
 ![Capturas de tela do aplicativo](./images/app-screens.png)
