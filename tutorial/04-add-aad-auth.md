@@ -1,33 +1,33 @@
 <!-- markdownlint-disable MD002 MD041 -->
 
-Neste exercício, você estenderá o aplicativo do exercício anterior para oferecer suporte à autenticação com o Azure AD. Isso é necessário para obter o token de acesso OAuth necessário para chamar o Microsoft Graph. Para fazer isso, você integrará a [biblioteca de autenticação da Microsoft (MSAL) para IOS](https://github.com/AzureAD/microsoft-authentication-library-for-objc) no aplicativo.
+Neste exercício, você estenderá o aplicativo do exercício anterior para dar suporte à autenticação com o Azure AD. Isso é necessário para obter o token de acesso OAuth necessário para chamar o Microsoft Graph. Para fazer isso, você integrará a Biblioteca de Autenticação da [Microsoft (MSAL) para iOS](https://github.com/AzureAD/microsoft-authentication-library-for-objc) ao aplicativo.
 
-1. Crie um novo arquivo de **lista de propriedades** no projeto do **GraphTutorial** chamado **AuthSettings. plist**.
-1. Adicione os seguintes itens ao arquivo no dicionário **raiz** .
+1. Crie um novo **arquivo de lista de** propriedades no projeto **GraphTutorial** chamado **AuthSettings.plist**.
+1. Adicione os itens a seguir ao arquivo no **dicionário** raiz.
 
     | Chave | Tipo | Valor |
     |-----|------|-------|
-    | `AppId` | String | A ID do aplicativo do portal do Azure |
-    | `GraphScopes` | Matriz | Dois valores de cadeia `User.Read` de caracteres: e`Calendars.Read` |
+    | `AppId` | Cadeia de caracteres | A ID do aplicativo do portal do Azure |
+    | `GraphScopes` | Matriz | Três valores de cadeia de `User.Read` caracteres: `MailboxSettings.Read` , e `Calendars.ReadWrite` |
 
-    ![Uma captura de tela do arquivo AuthSettings. plist no Xcode](./images/auth-settings.png)
+    ![Captura de tela do arquivo AuthSettings.plist no Xcode](./images/auth-settings.png)
 
 > [!IMPORTANT]
-> Se você estiver usando o controle de origem como o Git, agora seria uma boa hora para excluir o arquivo **AuthSettings. plist** do controle de origem para evitar vazar inadvertidamente sua ID de aplicativo.
+> Se você estiver usando o controle de código-fonte, como git, agora seria um bom momento para excluir o arquivo **AuthSettings.plist** do controle de código-fonte para evitar o vazamento inadvertida da ID do aplicativo.
 
-## <a name="implement-sign-in"></a>Implementar logon
+## <a name="implement-sign-in"></a>Implementar a login
 
-Nesta seção, você irá configurar o projeto para o MSAL, criar uma classe do Gerenciador de autenticação e atualizar o aplicativo para entrar e sair.
+Nesta seção, você configurará o projeto para MSAL, criará uma classe de gerenciador de autenticação e atualizará o aplicativo para entrar e sair.
 
-### <a name="configure-project-for-msal"></a>Configurar o Project para o MSAL
+### <a name="configure-project-for-msal"></a>Configurar o projeto para MSAL
 
 1. Adicione um novo grupo de chaves aos recursos do seu projeto.
-    1. Selecione o projeto **GraphTutorial** e, em seguida, **assinaturas & recursos**.
-    1. Selecione **+ recurso**e, em seguida, clique duas vezes em **compartilhamento de chaves**.
-    1. Adicione um grupo de chaves com o valor `com.microsoft.adalcache`.
+    1. Selecione o **projeto GraphTutorial** e, em seguida, **assinando & recursos.**
+    1. Select **+ Capability**, then double-click **Keychain Sharing**.
+    1. Adicione um grupo de chaves com o `com.microsoft.adalcache` valor.
 
-1. Control clique **info. plist** e selecione **abrir como**e, em seguida, **código-fonte**.
-1. Adicione o seguinte no `<dict>` elemento.
+1. Controle clique **em Info.plist** e selecione **Abrir como**, em seguida, **Código-fonte**.
+1. Adicione o seguinte dentro do `<dict>` elemento.
 
     ```xml
     <key>CFBundleURLTypes</key>
@@ -46,7 +46,7 @@ Nesta seção, você irá configurar o projeto para o MSAL, criar uma classe do 
     </array>
     ```
 
-1. Abra **AppDelegate. m** e adicione a seguinte instrução de importação na parte superior do arquivo.
+1. Abra **AppDelegate.m** e adicione a seguinte instrução de importação na parte superior do arquivo.
 
     ```objc
     #import <MSAL/MSAL.h>
@@ -56,24 +56,24 @@ Nesta seção, você irá configurar o projeto para o MSAL, criar uma classe do 
 
     :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/AppDelegate.m" id="HandleMsalResponseSnippet":::
 
-### <a name="create-authentication-manager"></a>Criar o Gerenciador de autenticação
+### <a name="create-authentication-manager"></a>Criar gerenciador de autenticação
 
-1. Crie uma nova **classe Cocoa Touch** no projeto **GraphTutorial** chamado **AuthenticationManager**. Escolha **NSObject** na **subclasse de** Field.
-1. Abra **AuthenticationManager. h** e substitua seu conteúdo pelo código a seguir.
+1. Crie uma nova **classe Cocoa Touch** no projeto **GraphTutorial** chamado **AuthenticationManager**. Escolha **NSObject** na **Subclasse do** campo.
+1. Abra **AuthenticationManager.h** e substitua seu conteúdo pelo código a seguir.
 
     :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/AuthenticationManager.h" id="AuthManagerSnippet":::
 
-1. Abra **AuthenticationManager. m** e substitua seu conteúdo pelo código a seguir.
+1. Abra **AuthenticationManager.m** e substitua seu conteúdo pelo código a seguir.
 
     :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/AuthenticationManager.m" id="AuthManagerSnippet":::
 
-### <a name="add-sign-in-and-sign-out"></a>Adicionar entrada e saída
+### <a name="add-sign-in-and-sign-out"></a>Adicionar entrar e sair
 
-1. Abra o arquivo **SignInViewController. m** e substitua seu conteúdo pelo código a seguir.
+1. Abra o **arquivo SignInViewController.m** e substitua seu conteúdo pelo código a seguir.
 
     :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/SignInViewController.m" id="SignInViewSnippet":::
 
-1. Abra **WelcomeViewController. m** e adicione a seguinte `import` instrução à parte superior do arquivo.
+1. Abra **WelcomeViewController.m** e adicione a `import` instrução a seguir na parte superior do arquivo.
 
     ```objc
     #import "AuthenticationManager.h"
@@ -83,18 +83,18 @@ Nesta seção, você irá configurar o projeto para o MSAL, criar uma classe do 
 
     :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/WelcomeViewController.m" id="SignOutSnippet":::
 
-1. Salve suas alterações e reinicie o aplicativo no simulador.
+1. Salve suas alterações e reinicie o aplicativo no Simulador.
 
-Se você entrar no aplicativo, verá um token de acesso exibido na janela de saída do Xcode.
+Se você entrar no aplicativo, deverá ver um token de acesso exibido na janela de saída no Xcode.
 
 ![Uma captura de tela da janela de saída no Xcode mostrando um token de acesso](./images/access-token-output.png)
 
 ## <a name="get-user-details"></a>Obter detalhes do usuário
 
-Nesta seção, você criará uma classe auxiliar para manter todas as chamadas para o Microsoft Graph e atualizará `WelcomeViewController` o para usar essa nova classe para obter o usuário conectado.
+Nesta seção, você criará uma classe auxiliar para manter todas as chamadas para o Microsoft Graph e atualizar para usar essa nova classe para obter o usuário `WelcomeViewController` conectado.
 
-1. Crie uma nova **classe Cocoa Touch** no projeto **GraphTutorial** chamado **graphmanager**. Escolha **NSObject** na **subclasse de** Field.
-1. Abra **graphmanager. h** e substitua seu conteúdo pelo código a seguir.
+1. Crie uma nova **classe Cocoa Touch** no projeto **GraphTutorial** chamado **GraphManager**. Escolha **NSObject** na **Subclasse do** campo.
+1. Abra **GraphManager.h** e substitua seu conteúdo pelo código a seguir.
 
     ```objc
     #import <Foundation/Foundation.h>
@@ -105,19 +105,20 @@ Nesta seção, você criará uma classe auxiliar para manter todas as chamadas p
 
     NS_ASSUME_NONNULL_BEGIN
 
-    typedef void (^GetMeCompletionBlock)(MSGraphUser* _Nullable user, NSError* _Nullable error);
+    typedef void (^GetMeCompletionBlock)(MSGraphUser* _Nullable user,
+                                         NSError* _Nullable error);
 
     @interface GraphManager : NSObject
 
     + (id) instance;
-    - (void) getMeWithCompletionBlock: (GetMeCompletionBlock)completionBlock;
+    - (void) getMeWithCompletionBlock: (GetMeCompletionBlock) completion;
 
     @end
 
     NS_ASSUME_NONNULL_END
     ```
 
-1. Abra **graphmanager. m** e substitua seu conteúdo pelo código a seguir.
+1. Abra **GraphManager.m** e substitua seu conteúdo pelo código a seguir.
 
     ```objc
     #import "GraphManager.h"
@@ -150,9 +151,11 @@ Nesta seção, você criará uma classe auxiliar para manter todas as chamadas p
         return self;
     }
 
-    - (void) getMeWithCompletionBlock:(GetMeCompletionBlock)completionBlock {
+    - (void) getMeWithCompletionBlock: (GetMeCompletionBlock) completion {
         // GET /me
-        NSString* meUrlString = [NSString stringWithFormat:@"%@/me", MSGraphBaseURL];
+        NSString* meUrlString = [NSString stringWithFormat:@"%@/me?%@",
+                                 MSGraphBaseURL,
+                                 @"$select=displayName,mail,mailboxSettings,userPrincipalName"];
         NSURL* meUrl = [[NSURL alloc] initWithString:meUrlString];
         NSMutableURLRequest* meRequest = [[NSMutableURLRequest alloc] initWithURL:meUrl];
 
@@ -162,7 +165,7 @@ Nesta seção, você criará uma classe auxiliar para manter todas as chamadas p
             client:self.graphClient
             completion:^(NSData *data, NSURLResponse *response, NSError *error) {
                 if (error) {
-                    completionBlock(nil, error);
+                    completion(nil, error);
                     return;
                 }
 
@@ -171,9 +174,9 @@ Nesta seção, você criará uma classe auxiliar para manter todas as chamadas p
                 MSGraphUser* user = [[MSGraphUser alloc] initWithData:data error:&graphError];
 
                 if (graphError) {
-                    completionBlock(nil, graphError);
+                    completion(nil, graphError);
                 } else {
-                    completionBlock(user, nil);
+                    completion(user, nil);
                 }
             }];
 
@@ -184,7 +187,7 @@ Nesta seção, você criará uma classe auxiliar para manter todas as chamadas p
     @end
     ```
 
-1. Abra **WelcomeViewController. m** e adicione as seguintes `#import` instruções na parte superior do arquivo.
+1. Abra **WelcomeViewController.m** e adicione as instruções a `#import` seguir na parte superior do arquivo.
 
     ```objc
     #import "SpinnerViewController.h"
@@ -192,7 +195,7 @@ Nesta seção, você criará uma classe auxiliar para manter todas as chamadas p
     #import <MSGraphClientModels/MSGraphClientModels.h>
     ```
 
-1. Adicione a seguinte propriedade à Declaração `WelcomeViewController` de interface.
+1. Adicione a propriedade a seguir à declaração `WelcomeViewController` da interface.
 
     ```objc
     @property SpinnerViewController* spinner;
@@ -202,4 +205,4 @@ Nesta seção, você criará uma classe auxiliar para manter todas as chamadas p
 
     :::code language="objc" source="../demo/GraphTutorial/GraphTutorial/WelcomeViewController.m" id="ViewDidLoadSnippet":::
 
-Se você salvar suas alterações e reiniciar o aplicativo agora, após entrar, a interface do usuário será atualizada com o nome de exibição e o endereço de email do usuário.
+Se você salvar suas alterações e reiniciar o aplicativo agora, depois de entrar na interface do usuário for atualizado com o nome de exibição e o endereço de email do usuário.
